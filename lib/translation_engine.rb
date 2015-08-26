@@ -16,20 +16,12 @@ module TranslationEngine
 
   def self.translate_text(key_param, *interpolations)
     
-    return translate_text_with_tooltip(key_param, *interpolations).html_safe
-
-  end
-
-  def self.translate_text_with_tooltip(key_param, *interpolations)
-
     #TAGS MODE
     return "[" + key_param.to_s + "]" if I18n.locale == :tags
 
     translation = build_translation(key_param, interpolations)
-    tooltip_translation = build_translation(key_param.to_s + "_help", interpolations)
-    tooltip_translation_with_wrapper = "<i class='fa fa-question-circle fa-2x pull-right label-help' style='margin-top:-4px;' title data-content='#{tooltip_translation}' tabindex='0'></i>" if !tooltip_translation.include? "Translation key not found"
-    return translation.html_safe + tooltip_translation_with_wrapper.html_safe if !tooltip_translation.include? "Translation key not found"
     return translation.html_safe
+
   end
 
   def self.build_translation(key_param, *interpolations)
