@@ -30,6 +30,7 @@ class TranslationsController < ApplicationController
 
     def new
         locale = Locale.find_by_name(params[:key_locale])
+        @key = params[:key] || ""
         @translation = Translation.new(locale: locale || nil)
     end
 
