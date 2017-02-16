@@ -12,7 +12,8 @@ namespace :translation_engine do
   end
 
   desc "Load database translations from config/locales/*.yml files"
-  task :load_locales => :environment do
+  task :load_translations => :environment do
+
     locales_directory = Rails.root.to_s + "/config/locales/"
 
     Dir.foreach(locales_directory) do |filename|
@@ -68,5 +69,18 @@ namespace :translation_engine do
         puts "Read #{success+failed} keys, #{success} successful, #{failed} failed, #{skipped} skipped"
       end # unless filename
     end # Dir.foreach
-  end #load_locaales
+  end #load_locales
+
+  desc "Sync Available Locales"
+  task :load_locales => :environment do
+    #Make sure that all locales are created
+    I18n.available_locales.each do |locale|
+      Locale.find_by(name: locale).first_or_create
+    end
+
+    #Delete an locales not in the available locales
+    Locale.where.not(name: I18n.available_locales).each do |locale|
+      locale.delete
+    end
+  end
 end #translation_engine
