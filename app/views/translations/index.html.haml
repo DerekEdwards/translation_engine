@@ -25,34 +25,28 @@
         
       %h1
         Content Translations
-  .panel.panel-default{style: 'padding: 0px;'}
-    .panel-heading
-      %h2.panel-title
-        Content Translations
-    .panel-body
-      %p Note: All content translations can be entered as HTML
-      %table.table.table-condensed.table-striped.table-bordered.table-hover#datatable#translations_table
-        %thead
+    %table.table.table-condensed.table-striped.table-bordered.table-hover#datatable#translations_table
+      %thead
+        %tr
+          %th= translate_helper(:key)
+          - @locales.each do |locale|
+            %th= translate_helper("locales.#{locale}")
+          %th= translate_helper(:delete)
+      %tbody
+        - @translation_keys.each do |translation_key|
           %tr
-            %th= translate_helper(:key)
+            %td= translation_key
             - @locales.each do |locale|
-              %th= translate_helper("locales.#{locale}")
-            %th= translate_helper(:delete)
-        %tbody
-          - @translation_keys.each do |translation_key|
-            %tr
-              %td= translation_key
-              - @locales.each do |locale|
-                - locale = locale.to_s
-                %td
-                  - current_translation = @translations_hash[translation_key][locale]
-                  - if (current_translation.present? && current_translation[:value].present?)
-                    = link_to current_translation[:value].truncate(30), translation_engine.edit_translation_path(current_translation[:id])
-                  - else
-                    - path = (current_translation.present? && current_translation[:value].blank?) ? translation_engine.edit_translation_path(current_translation[:id]) : translation_engine.new_translation_path(key: translation_key, key_locale: locale.to_s)
-                    = link_to translate_helper(:add), path, class: 'btn action-button'
-              %td.text-center
-                = check_box_tag "translation", @translations_hash[translation_key]["id"]
+              - locale = locale.to_s
+              %td
+                - current_translation = @translations_hash[translation_key][locale]
+                - if (current_translation.present? && current_translation[:value].present?)
+                  = link_to current_translation[:value].truncate(30), translation_engine.edit_translation_path(current_translation[:id])
+                - else
+                  - path = (current_translation.present? && current_translation[:value].blank?) ? translation_engine.edit_translation_path(current_translation[:id]) : translation_engine.new_translation_path(key: translation_key, key_locale: locale.to_s)
+                  = link_to translate_helper(:add), path, class: 'btn action-button'
+            %td.text-center
+              = check_box_tag "translation", @translations_hash[translation_key]["id"]
               
 :javascript
   $(document).ready(function() {
