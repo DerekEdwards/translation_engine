@@ -7,7 +7,7 @@
     .panel.panel-primary
       .panel-heading
         %h4
-          =@key.blank? ? "New Key" || @key
+          =@key.blank? ? "New Key" : @key
       .panel-body
         #translations_form
           .row
