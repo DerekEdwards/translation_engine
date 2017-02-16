@@ -22,19 +22,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", "~>5.0"
   spec.add_dependency "sass-rails"
   spec.add_dependency "pg"
-  #spec.add_dependency "i18n-active_record"
   spec.add_dependency "simple_form"
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "factory_girl_rails"
-  #spec.add_development_dependency "pry-byebug"
-  #spec.add_development_dependency "better_errors"
-
-  spec.add_development_dependency "rspec-core"
-  spec.add_development_dependency "rspec-rails"
-  #spec.add_development_dependency "capybara"
-  #spec.add_development_dependency "cucumber-rails"
-  #spec.add_development_dependency "database_cleaner"
-
 end
