@@ -6,28 +6,28 @@
     .col-md-10 
       %h1.text-center
         Translations
-    .col-md-2.text-right
+    .col-md-2
       = link_to translation_engine.new_translation_path do
         Add Key
-  
-  %table.table
-    %tr
-      %th= translate_helper(:key)
-      - @locales.each do |locale|
-        %th= translate_helper("locales.#{locale}")
-      %th= translate_helper(:delete)
-    - @translation_keys.each do |translation_key|
+  .row
+    %table.table
       %tr
-        %td= translation_key
+        %th= translate_helper(:key)
         - @locales.each do |locale|
-          - locale = locale.to_s
-          %td
-            - current_translation = @translations_hash[translation_key][locale]
-            - if (current_translation.present? && current_translation[:value].present?)
-              = link_to current_translation[:value].truncate(30), translation_engine.edit_translation_path(current_translation[:id])
-            - else
-              - path = (current_translation.present? && current_translation[:value].blank?) ? translation_engine.edit_translation_path(current_translation[:id]) : translation_engine.new_translation_path(key: translation_key, key_locale: locale.to_s)
-              = link_to translate_helper(:add), path, class: 'btn action-button'
-        %td.text-center
-          "DELETE"
+          %th= translate_helper("locales.#{locale}")
+        %th= translate_helper(:delete)
+      - @translation_keys.each do |translation_key|
+        %tr
+          %td= translation_key
+          - @locales.each do |locale|
+            - locale = locale.to_s
+            %td
+              - current_translation = @translations_hash[translation_key][locale]
+              - if (current_translation.present? && current_translation[:value].present?)
+                = link_to current_translation[:value].truncate(30), translation_engine.edit_translation_path(current_translation[:id])
+              - else
+                - path = (current_translation.present? && current_translation[:value].blank?) ? translation_engine.edit_translation_path(current_translation[:id]) : translation_engine.new_translation_path(key: translation_key, key_locale: locale.to_s)
+                = link_to translate_helper(:add), path, class: 'btn action-button'
+          %td.text-center
+            "DELETE"
             
