@@ -11,7 +11,7 @@ namespace :test do
   end
 
   desc "Load database translations from config/locales/*.yml files"
-  task load_locales: :environment do
+  task load_locales: => :environment do
   	locales_directory = Rails.root.to_s + "/config/locales/"
 
     Dir.foreach(locales_directory) do |filename|

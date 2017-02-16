@@ -33,12 +33,4 @@ namespace :translation_engine do
 
   end
 
-  def execute_sql(sql_param)
-    begin
-      ActiveRecord::Base.connection.execute(sql_param)
-    rescue => error
-      puts "Error executing sql: #{sql_param} ERROR IS: #{error.to_s}"
-    end
-  end
-
 end
