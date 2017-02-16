@@ -5,7 +5,7 @@ require 'translation_engine/action_view_extensions'
 #refactor these includes at some point, if possible
 #require 'tasks/database_tasks'
 require 'tasks/install'
-require 'tasks/test'
+require 'tasks/load'
 
 module TranslationEngine
 
