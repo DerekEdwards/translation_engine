@@ -2,13 +2,13 @@
 .col-md-1
 .col-md-10
   .row
-    .col-md-12 
-      .text-right
-        = link_to translation_engine.new_translation_path, :class => "btn action-button" do
-          Add Key
-
+    .col-md-2
+    .col-md-10 
       %h1.text-center
         Translations
+    .col-md-2.text-right
+      = link_to translation_engine.new_translation_path, do
+        Add Key
   
   %table.table
     %tr
