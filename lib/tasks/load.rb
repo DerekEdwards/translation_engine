@@ -12,7 +12,9 @@ namespace :translation_engine do
   end
 
   desc "Load database translations from config/locales/*.yml files"
-  task :load_translations => :environment do
+  task :update => :environment do
+
+    Rake::Task['translation_engine:load_locales'].invoke
 
     locales_directory = Rails.root.to_s + "/config/locales/"
 
@@ -73,6 +75,8 @@ namespace :translation_engine do
 
   desc "Sync Available Locales"
   task :load_locales => :environment do
+
+    puts 'Updating the available locales to #{I18n.available_locales}'
     #Make sure that all locales are created
     I18n.available_locales.each do |locale|
       Locale.where(name: locale).first_or_create
