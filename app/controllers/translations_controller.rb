@@ -1,5 +1,7 @@
 class TranslationsController < ApplicationController
 
+    authorize_resource
+
     def index
 
         @locales = I18n.available_locales.sort
