@@ -40,7 +40,7 @@ module TranslationEngine
       return "missing key #{key_param}"
     end
 
-    translation = Translation.find_by(locale: locale, key: key)
+    translation = Translation.find_by(locale: locale, translation_key: key)
     return translation.nil? ? 'translation missing #{locale.name}:#{key.name}' : translation.value 
     #Translation.find_by(locale: locale.find_by(name: locale))
     #return self.translate_text(key_param, *interpolations)
