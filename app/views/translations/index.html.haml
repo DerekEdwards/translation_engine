@@ -13,8 +13,7 @@
       %tr
         %th= translate_helper(:key)
         - @locales.each do |locale|
-          //%th= translate_helper("locales.#{locale.name}")
-          %th= "Place Holder"
+          %th= locale.name
         %th= translate_helper(:delete)
       - @translation_keys.each do |translation_key|
         %tr
