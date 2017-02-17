@@ -1,5 +1,4 @@
 require "translation_engine/version"
-require 'translation_engine/action_view_extensions'
 
 #refactor these includes at some point, if possible
 #require 'tasks/database_tasks'
