@@ -13,6 +13,15 @@ module TranslationEngine
     
   end
 
+  def reload
+    puts 'asdf'
+  end
+
+  def reload!
+
+    puts 'ok'
+  end
+
   def self.translate(locale_param, key_param, options={})
     puts "locale_param"
     puts locale_param
