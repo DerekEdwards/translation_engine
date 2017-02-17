@@ -13,24 +13,7 @@ module TranslationEngine
     
   end
 
-  def reload
-    puts 'asdf'
-  end
-
-  def reload!
-    puts 'ok'
-  end
-
   def self.translate(locale_param, key_param, options={})
-    puts "locale_param"
-    puts locale_param
-    puts "key_param"
-    puts key_param
-    puts "options"
-    puts options
-
-
-
     locale = Locale.find_by(name: locale_param)
     unless locale
       return "missing locale #{locale_param}"
@@ -41,9 +24,7 @@ module TranslationEngine
     end
 
     translation = Translation.find_by(locale: locale, translation_key: key)
-    return translation.nil? ? 'translation missing #{locale.name}:#{key.name}' : translation.value 
-    #Translation.find_by(locale: locale.find_by(name: locale))
-    #return self.translate_text(key_param, *interpolations)
+    return translation.nil? ? 'missing translation #{locale.name}:#{key.name}' : translation.value 
   end
 
 end
