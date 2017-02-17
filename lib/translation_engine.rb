@@ -40,6 +40,3 @@ module TranslationEngine
   end
 
 end
-
-#Include as view helper
-ActionView::Base.send :include, ActionViewExtensions
