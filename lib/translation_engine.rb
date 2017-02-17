@@ -1,7 +1,5 @@
 require "translation_engine/version"
 require 'translation_engine/action_view_extensions'
-require "translation_engine/test"
-
 
 #refactor these includes at some point, if possible
 #require 'tasks/database_tasks'
@@ -22,8 +20,6 @@ module TranslationEngine
 
   def self.translate_text(key_param, *interpolations)
 
-    return 'DEREK'
-    
     #TAGS MODE
     return "[" + key_param.to_s + "]" if I18n.locale == :tags
 
