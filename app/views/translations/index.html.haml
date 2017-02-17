@@ -1,4 +1,3 @@
-- content_for :title, "#{translate_helper(:site_title)} - #{translate_helper(:translations)}"
 .col-md-1
 .col-md-10
   .row
@@ -14,20 +13,20 @@
       %tr
         %th= translate_helper(:key)
         - @locales.each do |locale|
-          %th= translate_helper("locales.#{locale}")
+          %th= translate_helper("locales.#{locale.name}")
         %th= translate_helper(:delete)
       - @translation_keys.each do |translation_key|
         %tr
-          %td= translation_key
+          %td= translation_key.name
           - @locales.each do |locale|
             - locale = locale.to_s
             %td
-              - current_translation = @translations_hash[translation_key][locale]
-              - if (current_translation.present? && current_translation[:value].present?)
-                = link_to current_translation[:value].truncate(30), translation_engine.edit_translation_path(current_translation[:id])
+              - current_translation = translation_key.translation(locale)
+              - if current_translation && not current_translation.value.blank?
+                = link_to current_translation.value.truncate(30), translation_engine.edit_translation_path(current_translation.id)
               - else
-                - path = (current_translation.present? && current_translation[:value].blank?) ? translation_engine.edit_translation_path(current_translation[:id]) : translation_engine.new_translation_path(key: translation_key, key_locale: locale.to_s)
-                = link_to translate_helper(:add), path, class: 'btn action-button'
+                - path = (current_translation && current_translation.value.blank?) ? translation_engine.edit_translation_path(current_translation.id) : translation_engine.new_translation_path(key: translation_key.name, key_locale: locale.name.to_s)
+                = link_to translate_helper(:add), path
           %td.text-center
             =button_to 'Delete', translation_engine.translation_key_path(translation_key), {method: :delete, class: "btn btn-danger btn-sm", data: {confirm: "Are you sure?  This action cannot be undone!"}}
             

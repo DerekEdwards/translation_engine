@@ -4,27 +4,13 @@ class TranslationsController < ApplicationController
 
     def index
 
-        @locales = I18n.available_locales.sort
+        @locales = Locale.where(name: I18n.available_locales.sort)
 
-        translations = Translation.includes(:locale, :translation_key).references(:locale, :translation_key)
-            .where.not(translation_key_id: nil)
-            .where(locales: {name: I18n.available_locales}).order("translation_keys.name asc", "locales.name asc")
+        #translations = Translation.includes(:locale, :translation_key).references(:locale, :translation_key)
+        #    .where.not(translation_key_id: nil)
+        #    .where(locales: {name: I18n.available_locales}).order("translation_keys.name asc", "locales.name asc")
 
-        empty_locale_hash = Hash.new
-        @locales.each {|l| empty_locale_hash[l] = nil}
-
-        @translations_hash = Hash.new
-        translations.find_each do |t|
-            key_name = t.translation_key.name
-            @translations_hash[key_name] ||= empty_locale_hash.clone
-            @translations_hash[key_name]["id"] ||= t.translation_key.id
-            @translations_hash[key_name][t.locale.name] = {
-                id: t.id,
-                value: t.value
-            }
-        end
-
-        @translation_keys = @translations_hash.keys
+        @translation_keys = TranslationKey.all.order(:name)
 
     end
 

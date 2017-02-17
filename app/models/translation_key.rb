@@ -5,4 +5,8 @@ class TranslationKey < ActiveRecord::Base
   self.primary_key = :id 
   validates :name, length: { maximum: 255 }
 
+  def translation locale
+    self.translations.find_by(locale: locale)
+  end
+
 end
