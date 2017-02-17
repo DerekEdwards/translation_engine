@@ -13,16 +13,16 @@
       %tr
         %th= translate_helper(:key)
         - @locales.each do |locale|
-          %th= translate_helper("locales.#{locale.name}")
+          //%th= translate_helper("locales.#{locale.name}")
+          %th= "Place Holder"
         %th= translate_helper(:delete)
       - @translation_keys.each do |translation_key|
         %tr
           %td= translation_key.name
           - @locales.each do |locale|
-            - locale = locale.to_s
             %td
               - current_translation = translation_key.translation(locale)
-              - if current_translation && not current_translation.value.blank?
+              - if current_translation and not current_translation.value.blank?
                 = link_to current_translation.value.truncate(30), translation_engine.edit_translation_path(current_translation.id)
               - else
                 - path = (current_translation && current_translation.value.blank?) ? translation_engine.edit_translation_path(current_translation.id) : translation_engine.new_translation_path(key: translation_key.name, key_locale: locale.name.to_s)
