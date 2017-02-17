@@ -18,7 +18,6 @@ module TranslationEngine
   end
 
   def reload!
-
     puts 'ok'
   end
 
@@ -36,7 +35,7 @@ module TranslationEngine
     unless locale
       return "missing locale #{locale_param}"
     end
-    key = TranslationKey.find_by(name: key)
+    key = TranslationKey.find_by(name: key_param)
     unless key
       return "missing key #{key_param}"
     end
