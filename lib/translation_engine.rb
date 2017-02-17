@@ -1,5 +1,6 @@
 require "translation_engine/version"
 require 'translation_engine/action_view_extensions'
+require "translation_engine/test"
 
 
 #refactor these includes at some point, if possible
