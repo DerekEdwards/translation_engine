@@ -16,7 +16,13 @@ module TranslationEngine
     
   end
 
+  def self.translate(key_param, *interpolations)
+    return self.translate_text(key_param, *interpolations)
+  end
+
   def self.translate_text(key_param, *interpolations)
+
+    return 'DEREK'
     
     #TAGS MODE
     return "[" + key_param.to_s + "]" if I18n.locale == :tags
