@@ -29,5 +29,5 @@
                 - path = (current_translation.present? && current_translation[:value].blank?) ? translation_engine.edit_translation_path(current_translation[:id]) : translation_engine.new_translation_path(key: translation_key, key_locale: locale.to_s)
                 = link_to translate_helper(:add), path, class: 'btn action-button'
           %td.text-center
-            "DELETE"
+            =button_to 'Delete', translation_engine.translation_key_path(translation_key), {method: :delete, class: "btn btn-danger btn-sm", data: {confirm: "Are you sure?  This action cannot be undone!"}}
             
